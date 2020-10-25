@@ -6,11 +6,11 @@ from .clustering_medoid import cluster
 def load_params(path_file):
     
     # Path for input data
-    path_input = path_file + "\\input_data\\"     
+    path_input = path_file + "/input_data/"
         
     # load building data 
     path_nodes = path_input + "nodes.txt"
-    path_demands = path_input + "demands\\"
+    path_demands = path_input + "demands/"
     names = np.genfromtxt(open(path_nodes, "rb"),dtype = 'str', delimiter = ",", usecols=(3))           # --,       node names            
     # Create dictionary with node data
     nodes = {}
