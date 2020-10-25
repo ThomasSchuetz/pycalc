@@ -110,7 +110,7 @@ def cluster(inputs, n_cluster=12, norm=2, weights=None, cluster_method="PAM"):
         print("Clustering design days with PAM algorithm (n_cluster=" + str(n_cluster) + ")...")      
         scaled_typ_days, nc, z = k_medoids_PAM(d, n_cluster, inputs, len_day)
     
-    return scaled_typ_days, z, nc, inputs
+    return scaled_typ_days, nc, z
 
 
 def k_medoids_PAM(D, k, inputs, len_day, tmax=200):
