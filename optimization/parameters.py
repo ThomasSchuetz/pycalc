@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import numpy as np
-import clustering_medoid as clustering
-
+from .clustering_medoid import cluster
 
 def load_params(path_file):
     
@@ -58,7 +57,7 @@ def load_params(path_file):
     # Price for electricity taken from grid
     if param["switch_variable_price"]:
         # Load EPEX SPOT electricity prices from 2015
-        spot_prices = np.loadtxt(open("input_data/Spotpreise15.txt", "rb"), delimiter = ",",skiprows = 0, usecols=(0)) / 1000        # kEUR/MWh 
+        spot_prices = np.loadtxt(open(path_input + "Spotpreise15.txt", "rb"), delimiter = ",",skiprows = 0, usecols=(0)) / 1000        # kEUR/MWh 
         param["price_el"] = 0.10808 + spot_prices       # kEUR/MWh
     else:
         param["price_el"] = 0.14506 * np.ones(8760)     # kEUR/MWh
@@ -68,7 +67,7 @@ def load_params(path_file):
     param["revenue_feed_in"] = {}
     if param["switch_var_revenue"]:
         # Load time series of feed-in revenue
-        param["revenue_feed_in_CHP"] = np.loadtxt(open("input_data/revenue_feed_in.txt", "rb"), delimiter = ",",skiprows = 0, usecols=(0)) / 1000        # kEUR/MWh 
+        param["revenue_feed_in_CHP"] = np.loadtxt(open(path_input + "revenue_feed_in.txt", "rb"), delimiter = ",",skiprows = 0, usecols=(0)) / 1000        # kEUR/MWh 
     else:
         param["revenue_feed_in_CHP"] = 0.06 * np.ones(8760)         # kEUR/MWh                 
         
@@ -113,7 +112,7 @@ def load_params(path_file):
     param["T_ref"] = 25                      # °C,   reference temperature for exergy calculation
     
     #%% WEATHER DATA
-    param["T_air"] = np.loadtxt(open("input_data/weather.csv", "rb"), delimiter = ",",skiprows = 1, usecols=(0))       # °C,    air temperature
+    param["T_air"] = np.loadtxt(open(path_input + "weather.csv", "rb"), delimiter = ",",skiprows = 1, usecols=(0))       # °C,    air temperature
    
     #%% WATER PROPERTIES
     param["rho_f"] = 1000       # kg/m^3,   density
@@ -157,7 +156,7 @@ def load_params(path_file):
     inputs_clustering = np.array(time_series)
     
     # Execute clustering algorithm
-    (clustered_series, nc, z) = clustering.cluster(inputs_clustering, 
+    (clustered_series, nc, z) = cluster(inputs_clustering, 
                                      param["n_clusters"],
                                      norm = 2,
                                      mip_gap = 0.01, 

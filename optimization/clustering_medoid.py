@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import math
-import k_medoids
+from .k_medoids import k_medoids
 
 def _distances(values, norm=2):
     """
@@ -106,7 +106,7 @@ def cluster(inputs, number_clusters=12, norm=2, time_limit=300, mip_gap=0.0,
     d = _distances(L, norm)
 
     # Execute optimization model
-    (y, z, obj) = k_medoids.k_medoids(d, number_clusters, time_limit, mip_gap)
+    (y, z, obj) = k_medoids(d, number_clusters, time_limit, mip_gap)
     
     # Section 2.3 and retain typical days
     nc = np.zeros_like(y)

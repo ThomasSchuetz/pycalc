@@ -3,7 +3,7 @@ from ortools.linear_solver import pywraplp
 import time
 import numpy as np
 
-def run_optim(obj_fn, dem, param, devs, dir_results):
+def run_optim(obj_fn, dem, param, devs):
     
     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Load model parameter

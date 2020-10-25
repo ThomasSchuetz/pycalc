@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
-import parameters
-import optim_model
+from .parameters import load_params
+from .optim_model import run_optim
 
 def run(obj_fn = "tac"):
     """
@@ -14,9 +14,9 @@ def run(obj_fn = "tac"):
     path_file = str(os.path.dirname(os.path.realpath(__file__)))
     
     # Load parameters
-    nodes, param, devs = parameters.load_params(path_file)
+    nodes, param, devs = load_params(path_file)
     
     # Run device optimization
-    param, capacities = optim_model.run_optim(obj_fn, nodes, param, devs)
+    param, capacities = run_optim(obj_fn, nodes, param, devs)
     
     return param, capacities
