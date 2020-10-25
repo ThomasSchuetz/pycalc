@@ -38,7 +38,7 @@ def load_params(path_file):
              "switch_post_processing": 1,           # ---,      post processing on / off
                           
              # Type-day clustering
-             "n_clusters": 12,                    
+             "n_clusters": 4,                    
                           
              # BU Devices
              "feasible_TES": 1,             # ---,          are thermal energy storages feasible for BU?
