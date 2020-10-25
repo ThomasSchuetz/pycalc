@@ -6,6 +6,13 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/optimize_sizing', methods = ['POST'])
+def optimize_sizing():
+    from optimization.run_optimization import run
+    params, capacities = run()
+    return jsonify( { "capacities": capacities } )
+
+
 @app.route('/add', methods = ['POST'])
 def add():
     inputs = request.get_json()
