@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import numpy as np
-from .clustering_medoid import cluster
+from .k_medoids_PAM import cluster
 
 def load_params(path_file):
     
@@ -159,7 +159,6 @@ def load_params(path_file):
     (clustered_series, nc, z) = cluster(inputs_clustering, 
                                      param["n_clusters"],
                                      norm = 2,
-                                     mip_gap = 0.01, 
                                      )
     
      # Retrieve clustered time series
