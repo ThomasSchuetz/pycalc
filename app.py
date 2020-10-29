@@ -13,6 +13,17 @@ def optimize_sizing():
     return jsonify( { "capacities": capacities } )
 
 
+@app.route("/get_demands", methods = ["POST"])
+def get_demands():
+    from numpy import loadtxt
+    import os
+    path_file = str(os.path.dirname(os.path.realpath(__file__)))
+    path_demands = path_file + "/optimization/input_data/demands/"
+    heating_demand = loadtxt(path_demands + "15.1_heating.txt")
+    cooling_demand = loadtxt(path_demands + "15.1_cooling.txt")
+    return jsonify( {"heating": heating_demand, "cooling": cooling_demand})
+
+
 @app.route('/add', methods = ['POST'])
 def add():
     inputs = request.get_json()
