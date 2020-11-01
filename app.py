@@ -23,6 +23,11 @@ def get_demands():
     cooling_demand = loadtxt(path_demands + "15.1_cooling.txt")
     return jsonify( {"heating": heating_demand, "cooling": cooling_demand})
 
+@app.route("/demgen", methods = ["POST"])
+def demgen():
+    inputs = request.get_json()
+    from demgen.demgen import calc_results
+    return jsonify( calc_results(inputs) )
 
 @app.route('/add', methods = ['POST'])
 def add():
