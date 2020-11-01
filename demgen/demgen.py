@@ -105,42 +105,7 @@ def calc_results(input_params):  # (request, context):
 
             if abs(peak[m][temp_set] - param["heat"]["peak_demand"]) < best_eps:
                 best_temp_set[m] = temp_set
-                best_eps = abs(peak[m][temp_set] - param["heat"]["peak_demand"])
-    
-    hourly_dem = {}
-    hour_in_minute = {}
-    for m in type_demands:
-        hour_in_minute[m] = np.zeros(8761)
-        hourly_dem[m] = np.zeros(8761)
-        for hour in range(8760):
-            if hour==8760:
-                hour_in_minute[m][hour+1] = hour_in_minute[m][0]
-            else:    
-                hourly_dem[m][hour] = np.round_(course[m][best_temp_set[m]][hour], decimals=2, out=None)
-                hour_in_minute[m][hour] = course[m][best_temp_set[m]][hour]/60
-            
-    
-    
-    daily_dem = {}
-    for m in type_demands:
-        daily_dem[m] = np.zeros(365)
-        for day in range (365):
-            daily_dem[m][day] = np.round_(sum(
-                course[m][best_temp_set[m]][t] for t in range(day * 24, (day +1) *24)
-                ), decimals=2, out=None)
-
-    
-    minutes_dem = {}
-    for m in type_demands:
-        minutes_dem[m] = np.zeros(525600)
-        for minute in range(525600):
-            if minute/60==int:
-                minutes_dem[m][minute] = np.round_(hour_in_minute[m][int(minute/60)], decimals=2, out=None)
-            else:
-                x = (hour_in_minute[m][int(minute/60)],hour_in_minute[m][int(minute/60 + 1)])
-                y = (int(minute/60)*60,int(minute/60 + 1)*60)
-                minutes_dem[m][minute] = np.round_(np.interp(minute, y, x), decimals=2, out=None)
-           
+                best_eps = abs(peak[m][temp_set] - param["heat"]["peak_demand"])          
                 
     month_tuple = (
         "Jan",
