@@ -26,6 +26,7 @@ def get_demands():
 @app.route("/demgen", methods = ["POST"])
 def demgen():
     inputs = request.get_json()
+    print("inputs: " + inputs)
     from demgen.demgen import calc_results
     return jsonify( calc_results(inputs) )
 
